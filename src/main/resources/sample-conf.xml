@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <databases>
+
+        <database>
+            <type>Postgres</type>
+            <connection>connection-string</connection>
+            <bot>bot_name</bot>
+            <health-check-timeout>10000</health-check-timeout>
+            <ping-retries></ping-retries>
+        </database>
+
+        <database>
+            <type>Postgres</type>
+            <connection>connection-string</connection>
+            <bot>bot_name</bot>
+            <health-check-timeout>10000</health-check-timeout>
+            <ping-retries></ping-retries>
+        </database>
+
+    </databases>
+</configuration>

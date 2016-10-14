@@ -1,0 +1,25 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="configuration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="databases">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="database" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="type"/>
+                                        <xs:element type="xs:string" name="connection"/>
+                                        <xs:element type="xs:string" name="bot"/>
+                                        <xs:element type="xs:unsignedLong" name="health-check-timeout"/>
+                                        <xs:element type="xs:int" name="ping-retries"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
