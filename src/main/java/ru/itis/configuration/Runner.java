@@ -24,7 +24,7 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        if (strings[0] != null) {
+        if (strings.length > 0 && strings[0] != null) {
             readXmlConfiguration(strings[0]);
         }
     }
