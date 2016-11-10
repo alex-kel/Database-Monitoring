@@ -5,13 +5,24 @@ package ru.itis.telegram.models;
  */
 public class MessageData {
 
-    private Long userId;
+    private Long chatId;
 
-    public Long getUserId() {
-        return userId;
+    private String messageBody;
+
+    public MessageData(Long chatId, String messageBody) {
+        this.chatId = chatId;
+        this.messageBody = messageBody;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public Long getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
+    }
+
+    public String getMessageBody() {
+        return messageBody;
     }
 }

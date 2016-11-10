@@ -14,7 +14,6 @@ public enum MessageType {
     CREATE_NEW_QUERY_SEL("Create New Query", true),
     DELETE_STORED_QUERY("delete", false),
     DELETE_STORED_QUERY_SEL("Delete stored Query", true),
-    LIST_STORED_QUERY("list", false),
     LIST_STORED_QUERY_SEL("List stored Query", true);
 
     MessageType(String keyWord, boolean showWhenStart) {
