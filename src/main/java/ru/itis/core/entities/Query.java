@@ -1,4 +1,4 @@
-package ru.itis.entities;
+package ru.itis.core.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 

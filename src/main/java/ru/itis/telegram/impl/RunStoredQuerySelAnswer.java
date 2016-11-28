@@ -5,7 +5,7 @@ import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.itis.entities.Query;
+import ru.itis.core.entities.Query;
 import ru.itis.telegram.IAnswer;
 import ru.itis.telegram.IDatabaseService;
 

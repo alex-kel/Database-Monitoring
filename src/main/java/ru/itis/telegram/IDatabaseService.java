@@ -1,6 +1,6 @@
 package ru.itis.telegram;
 
-import ru.itis.entities.Query;
+import ru.itis.core.entities.Query;
 
 import java.util.List;
 

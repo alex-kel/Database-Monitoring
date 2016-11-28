@@ -3,19 +3,23 @@
     <databases>
 
         <database>
+            <name>my_db</name>
             <type>Postgres</type>
             <connection>connection-string</connection>
+            <user></user>
+            <password></password>
             <bot>bot_name</bot>
             <health-check-timeout>10000</health-check-timeout>
-            <ping-retries></ping-retries>
         </database>
 
         <database>
+            <name>prod_db</name>
             <type>Postgres</type>
             <connection>connection-string</connection>
+            <user></user>
+            <password></password>
             <bot>bot_name</bot>
             <health-check-timeout>10000</health-check-timeout>
-            <ping-retries></ping-retries>
         </database>
 
     </databases>

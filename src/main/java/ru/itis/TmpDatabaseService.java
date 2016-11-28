@@ -1,7 +1,7 @@
 package ru.itis;
 
 import org.springframework.stereotype.Service;
-import ru.itis.entities.Query;
+import ru.itis.core.entities.Query;
 import ru.itis.telegram.IDatabaseService;
 
 import java.util.ArrayList;

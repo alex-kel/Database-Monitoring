@@ -2,20 +2,16 @@
     <xs:element name="configuration">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="databases">
+                <xs:element name="database" maxOccurs="unbounded" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="database" maxOccurs="unbounded" minOccurs="0">
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element type="xs:string" name="type"/>
-                                        <xs:element type="xs:string" name="connection"/>
-                                        <xs:element type="xs:string" name="bot"/>
-                                        <xs:element type="xs:unsignedLong" name="health-check-timeout"/>
-                                        <xs:element type="xs:int" name="ping-retries"/>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
+                            <xs:element type="xs:string" name="name"/>
+                            <xs:element type="xs:string" name="type"/>
+                            <xs:element type="xs:string" name="connection"/>
+                            <xs:element type="xs:string" name="user"/>
+                            <xs:element type="xs:string" name="password"/>
+                            <xs:element type="xs:string" name="bot"/>
+                            <xs:element type="xs:unsignedLong" name="health-check-timeout"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

@@ -19,4 +19,5 @@ public class ConfigurationHolder {
     public void setConnectionsConfiguration(Configuration connectionsConfiguration) {
         this.connectionsConfiguration = connectionsConfiguration;
     }
+
 }
