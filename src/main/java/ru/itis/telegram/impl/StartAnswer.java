@@ -1,29 +1,25 @@
 package ru.itis.telegram.impl;
 
 import com.pengrad.telegrambot.model.Chat;
-import com.pengrad.telegrambot.model.request.ParseMode;
-import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
-import ru.itis.telegram.IAnswer;
-import ru.itis.telegram.KeyboardUtil;
+import ru.itis.telegram.exception.DoTaskException;
 
 /**
  * Created by Aydar Farrakhov on 10.11.16.
  */
 @Component
-public class StartAnswer implements IAnswer {
+public class StartAnswer extends BaseAnswer {
 
 
     @Override
-    public SendMessage process(Chat chat, String text) {
-
-
-        return new SendMessage(chat.id(), "What do you want to do?")
-                .parseMode(ParseMode.HTML)
-                .disableWebPagePreview(true)
-                .replyMarkup(KeyboardUtil.getStartedKeyboard());
+    String getText(String text, Chat chat) throws DoTaskException {
+        return "Что вы хотите сделать?";
     }
 
+    @Override
+    boolean withStartKeyboard() {
+        return true;
+    }
 
 
 }

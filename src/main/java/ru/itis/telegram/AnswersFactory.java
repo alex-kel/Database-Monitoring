@@ -31,6 +31,10 @@ public class AnswersFactory {
     private DeleteQuerySelAnswer deleteQuerySelAnswer;
     @Autowired
     private ListStoredQueryAnswer listStoredQueryAnswer;
+    @Autowired
+    private ShowStoredQueryAnswer showStoredQueryAnswer;
+    @Autowired
+    private ShowStoredQuerySelAnswer showStoredQuerySelAnswer;
 
     public IAnswer getByType(MessageType type) {
         if (type == null) {
@@ -55,6 +59,10 @@ public class AnswersFactory {
                 return deleteQuerySelAnswer;
             case LIST_STORED_QUERY_SEL:
                 return listStoredQueryAnswer;
+            case SHOW_STORED_QUERY_SEL:
+                return showStoredQuerySelAnswer;
+            case SHOW_STORED_QUERY:
+                return showStoredQueryAnswer;
             default:
                 return startAnswer;
         }

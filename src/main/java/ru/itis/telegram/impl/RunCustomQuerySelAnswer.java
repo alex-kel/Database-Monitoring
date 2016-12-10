@@ -1,24 +1,24 @@
 package ru.itis.telegram.impl;
 
 import com.pengrad.telegrambot.model.Chat;
-import com.pengrad.telegrambot.model.request.ParseMode;
-import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
-import ru.itis.telegram.IAnswer;
+import ru.itis.telegram.exception.DoTaskException;
 
 /**
  * Created by Aydar Farrakhov on 10.11.16.
  */
 @Component
-public class RunCustomQuerySelAnswer implements IAnswer {
+public class RunCustomQuerySelAnswer extends BaseAnswer {
 
 
     @Override
-    public SendMessage process(Chat chat, String text) {
+    String getText(String text, Chat chat) throws DoTaskException {
+        return "Введите SQL запрос";
+    }
 
-        return new SendMessage(chat.id(), "type run_custom and when your query")
-                .parseMode(ParseMode.HTML)
-                .disableWebPagePreview(true);
+    @Override
+    boolean withStartKeyboard() {
+        return false;
     }
 
 

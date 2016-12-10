@@ -7,6 +7,12 @@ import ru.itis.telegram.models.MessageData;
  */
 public interface ITelegramService {
 
-    void sendMessage(MessageData data);
+    /**
+     * Отправляет сообщение определенному пользователю
+     *
+     * @param data текст и получатель сообщения
+     * @return <code>true </code> если сообщение отправлено, иначе <code>false</code>
+     */
+    boolean sendMessage(MessageData data);
 
 }

@@ -8,22 +8,16 @@ import ru.itis.telegram.exception.DoTaskException;
  * Created by Aydar Farrakhov on 10.11.16.
  */
 @Component
-public class RunStoredQueryAnswer extends BaseAnswer {
-
-    private static final String NOT_FOUND = "Запрос не найден";
+public class ShowStoredQuerySelAnswer extends BaseAnswer {
 
     @Override
     String getText(String text, Chat chat) throws DoTaskException {
-        try {
-            return "Результат: " + databaseService.runStoredQuery(Long.valueOf(text));
-        } catch (NumberFormatException e) {
-            return NOT_FOUND;
-        }
+        return writeIDBaseText();
     }
 
     @Override
     boolean withStartKeyboard() {
-        return true;
+        return false;
     }
-
 }
+
