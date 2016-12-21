@@ -53,4 +53,9 @@ public class TmpDatabaseService implements IDatabaseService{
     public Query getQuery(Long id) {
         return createQuery(id);
     }
+
+    @Override
+    public void addIfNotExist(Long id, String username, String firstName, String lastName) throws DoTaskException {
+
+    }
 }

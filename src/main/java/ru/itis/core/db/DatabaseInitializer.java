@@ -2,7 +2,7 @@ package ru.itis.core.db;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.itis.core.service.ConfiguredDatabasesService;
+import ru.itis.core.service.impl.ConfiguredDatabasesService;
 import ru.itis.core.util.DbUtils;
 
 import javax.sql.DataSource;
