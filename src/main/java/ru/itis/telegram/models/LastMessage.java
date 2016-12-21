@@ -13,10 +13,19 @@ public class LastMessage {
 
     private long chatId;
 
+    private Long database;
+
     public LastMessage(MessageType type, long chatId) {
         this.type = type;
         this.created = new Date();
         this.chatId = chatId;
+    }
+
+    public LastMessage(MessageType type, Long chatId, Long database) {
+        this.type = type;
+        this.created = new Date();
+        this.chatId = chatId;
+        this.database = database;
     }
 
     public MessageType getType() {
@@ -41,5 +50,13 @@ public class LastMessage {
 
     public void setChatId(long chatId) {
         this.chatId = chatId;
+    }
+
+    public Long getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Long database) {
+        this.database = database;
     }
 }

@@ -13,8 +13,8 @@ public class CreateNewQueryAnswer extends BaseAnswer {
     private static final String SUCCESS_MESSAGE = "Запрос успешно добавлен";
 
     @Override
-    String getText(String text, Chat chat) throws DoTaskException {
-        databaseService.storeNewQuery(text);
+    String getText(String text, Chat chat, Long database) throws DoTaskException {
+        databaseService.storeNewQuery(text, database);
         return SUCCESS_MESSAGE;
     }
 

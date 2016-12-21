@@ -11,8 +11,8 @@ import ru.itis.telegram.exception.DoTaskException;
 public class ListStoredQueryAnswer extends BaseAnswer {
 
     @Override
-    String getText(String text, Chat chat) throws DoTaskException {
-       return storedQueryList();
+    String getText(String text, Chat chat, Long database) throws DoTaskException {
+       return storedQueryList(database);
     }
 
     @Override

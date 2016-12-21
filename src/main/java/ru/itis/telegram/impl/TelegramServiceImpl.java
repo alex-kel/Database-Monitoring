@@ -19,6 +19,7 @@ import ru.itis.telegram.ITelegramService;
 import ru.itis.telegram.KeyboardUtil;
 import ru.itis.telegram.MessagesHolder;
 import ru.itis.telegram.exception.DoTaskException;
+import ru.itis.telegram.models.LastMessage;
 import ru.itis.telegram.models.MessageData;
 import ru.itis.telegram.models.MessageType;
 
@@ -62,9 +63,25 @@ public class TelegramServiceImpl implements ITelegramService {
         logger.info("Receive message: {} , chat {}", text, chat.id());
         SendMessage request;
         try {
-            MessageType type = getMessageType(text, chat);
-            logger.info("Determine type: {}, chat {}", type.name(), chat.id());
-            request = factory.getByType(type).process(chat, text);
+            LastMessage lastMessage = getLastMessage(chat);
+            MessageType type;
+            Long database = null;
+            if (lastMessage == null) {
+                type = MessageType.typeByMessage(text);
+                if (type.getNextType() != null) {
+                    messagesHolder.putMessage(chat.id(), type);
+                }
+            } else {
+                type = lastMessage.getType().getNextType();
+                if (lastMessage.getType().isDatabase()) {
+                    database = Long.valueOf(text);
+                } else {
+                    database = lastMessage.getDatabase();
+                }
+                messagesHolder.putMessage(chat.id(), type, database);
+            }
+            logger.info("Determine type: {}, chat {}", type != null ? type.name() : null, chat.id());
+            request = factory.getByType(type).process(chat, text, database);
         } catch (DoTaskException e) {
             request = getErrorAnswer(chat, e.getMessage());
             logger.error("Error {}, when processing message: {}, chat: {}", e.getMessage(),
@@ -98,17 +115,13 @@ public class TelegramServiceImpl implements ITelegramService {
                 .replyMarkup(KeyboardUtil.getStartedKeyboard());
     }
 
-    private MessageType getMessageType(String text, Chat chat) {
-        MessageType type = messagesHolder.getLastMessage(chat.id());
-        if (type == null) {
-            MessageType newType = MessageType.typeByMessage(text);
-            if (newType.getNextType() != null) {
-                messagesHolder.putMessage(chat.id(), newType);
-            }
-            return newType;
+    private LastMessage getLastMessage(Chat chat) {
+        LastMessage message = messagesHolder.getLastMessage(chat.id());
+        if (message == null) {
+           return null;
         } else {
             messagesHolder.removeMessage(chat.id());
-            return type.getNextType();
+            return message;
         }
     }
 

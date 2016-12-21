@@ -35,6 +35,8 @@ public class AnswersFactory {
     private ShowStoredQueryAnswer showStoredQueryAnswer;
     @Autowired
     private ShowStoredQuerySelAnswer showStoredQuerySelAnswer;
+    @Autowired
+    private ChooseDBQuerySelAnswer chooseDBQuerySelAnswer;
 
     public IAnswer getByType(MessageType type) {
         if (type == null) {
@@ -63,6 +65,13 @@ public class AnswersFactory {
                 return showStoredQuerySelAnswer;
             case SHOW_STORED_QUERY:
                 return showStoredQueryAnswer;
+            case CHOOSE_DATABASE_CUSTOM_QUERY:
+            case CHOOSE_DATABASE_RUN_STORED_QUERY:
+            case CHOOSE_DATABASE_NEW_QUERY:
+            case CHOOSE_DATABASE_DELETE:
+            case CHOOSE_DATABASE_LIST_QUERIES:
+            case CHOOSE_DATABASE_SHOW_QUERY:
+                return chooseDBQuerySelAnswer;
             default:
                 return startAnswer;
         }

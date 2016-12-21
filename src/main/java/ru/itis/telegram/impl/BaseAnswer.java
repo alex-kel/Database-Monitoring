@@ -21,14 +21,14 @@ public abstract class BaseAnswer implements IAnswer{
     @Autowired
     protected IDatabaseService databaseService;
 
-    abstract String getText(String text, Chat chat) throws DoTaskException;
+    abstract String getText(String text, Chat chat, Long database) throws DoTaskException;
 
     abstract boolean withStartKeyboard();
 
     @Override
-    public SendMessage process(Chat chat, String text) throws DoTaskException {
+    public SendMessage process(Chat chat, String text, Long database) throws DoTaskException {
         databaseService.addIfNotExist(chat.id(), chat.username(), chat.firstName(), chat.lastName());
-        SendMessage message = new SendMessage(chat.id(), getText(text, chat))
+        SendMessage message = new SendMessage(chat.id(), getText(text, chat, database))
                 .parseMode(ParseMode.HTML)
                 .disableWebPagePreview(true);
         if (withStartKeyboard()) {
@@ -37,12 +37,12 @@ public abstract class BaseAnswer implements IAnswer{
         return message;
     }
 
-    protected String writeIDBaseText() throws DoTaskException {
-        return "Введите ID запроса: \n" + storedQueryList();
+    protected String writeIDBaseText(Long database) throws DoTaskException {
+        return "Введите ID запроса: \n" + storedQueryList(database);
     }
 
-    protected String storedQueryList() throws DoTaskException {
-        List<Query> queries = databaseService.getQueries();
+    protected String storedQueryList(Long database) throws DoTaskException {
+        List<Query> queries = databaseService.getQueries(database);
         return "Сохраненные запросы:" + queries.stream()
                 .map(q -> String.format("%d. %s", q.getId(), q.getName()))
                 .collect(Collectors.joining("\n"));

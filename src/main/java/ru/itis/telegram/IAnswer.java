@@ -9,6 +9,6 @@ import ru.itis.telegram.exception.DoTaskException;
  */
 public interface IAnswer {
 
-    SendMessage process(Chat chat, String text) throws DoTaskException;
+    SendMessage process(Chat chat, String text, Long database) throws DoTaskException;
 
 }

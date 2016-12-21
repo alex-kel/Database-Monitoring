@@ -13,53 +13,59 @@ public interface IDatabaseService {
     /**
      * Возвращает сохраненные пользователями запросы
      *
+     * @param database база данных для запроса
      * @return список сохраненных запросов
      * @throws DoTaskException ошибка при получении запросов
      */
-    List<Query> getQueries() throws DoTaskException;
+    List<Query> getQueries(Long database) throws DoTaskException;
 
     /**
      * Запускает SQL запрос
      *
      * @param query SQL запрос для запуска
+     * @param database база данных для запроса
      * @return результат выполнения SQL запроса
      * @throws DoTaskException ошибка при выполнении запроса
      */
-    String runCustomQuery(String query) throws DoTaskException;
+    String runCustomQuery(String query, Long database) throws DoTaskException;
 
     /**
      * Запускает сохраненный SQL запрос
      *
      * @param id идентификатор SQL запроса
+     * @param database база данных для запроса
      * @return результат выполнения SQL запроса
      * @throws DoTaskException ошибка при выполнении запроса
      */
-    String runStoredQuery(Long id) throws DoTaskException;
+    String runStoredQuery(Long id, Long database) throws DoTaskException;
 
     /**
      * Сохраняет новый SQL запрос
      *
      * @param text SQL запрос
+     * @param database база данных для запроса
      * @throws DoTaskException ошибка при сохранении запроса
      */
-    void storeNewQuery(String text) throws DoTaskException;
+    void storeNewQuery(String text, Long database) throws DoTaskException;
 
     /**
      * Удаляет SQL запрос
      *
      * @param id идентификатор SQL запроса
+     * @param database база данных для запроса
      * @throws DoTaskException ошибка при удалении запроса
      */
-    void deleteStoredQuery(Long id) throws DoTaskException;
+    void deleteStoredQuery(Long id, Long database) throws DoTaskException;
 
     /**
      * Возвращает сохраненный SQL запрос
      *
      * @param id идентификатор SQL запроса
+     * @param database база данных для запроса
      * @return SQL запрос
      * @throws DoTaskException ошибка при получении SQL запроса
      */
-    Query getQuery(Long id) throws DoTaskException;
+    Query getQuery(Long id, Long database) throws DoTaskException;
 
     /**
      * Добавляет нового пользователя, если он еще не был добавлен

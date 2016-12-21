@@ -19,14 +19,17 @@ public class MessagesHolder {
 
     private ConcurrentHashMap<Long, LastMessage> messages = new ConcurrentHashMap<>();
 
-    public MessageType getLastMessage(Long chatId) {
+    public LastMessage getLastMessage(Long chatId) {
         return Optional.ofNullable(messages.get(chatId))
-                .map(LastMessage::getType)
                 .orElse(null);
     }
 
     public void putMessage(Long chatId, MessageType type) {
         messages.put(chatId, new LastMessage(type, chatId));
+    }
+
+    public void putMessage(Long chatId, MessageType type, Long database) {
+        messages.put(chatId, new LastMessage(type, chatId, database));
     }
 
     public void removeMessage(Long chatId) {

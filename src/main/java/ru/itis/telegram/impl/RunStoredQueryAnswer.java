@@ -13,9 +13,9 @@ public class RunStoredQueryAnswer extends BaseAnswer {
     private static final String NOT_FOUND = "Запрос не найден";
 
     @Override
-    String getText(String text, Chat chat) throws DoTaskException {
+    String getText(String text, Chat chat, Long database) throws DoTaskException {
         try {
-            return "Результат: " + databaseService.runStoredQuery(Long.valueOf(text));
+            return "Результат: " + databaseService.runStoredQuery(Long.valueOf(text), database);
         } catch (NumberFormatException e) {
             return NOT_FOUND;
         }

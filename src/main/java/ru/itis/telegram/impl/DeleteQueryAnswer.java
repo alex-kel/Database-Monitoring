@@ -14,9 +14,9 @@ public class DeleteQueryAnswer extends BaseAnswer {
     private static final String NOT_FOUND = "SQL Запрос не найден";
 
     @Override
-    String getText(String text, Chat chat) throws DoTaskException{
+    String getText(String text, Chat chat, Long database) throws DoTaskException{
         try {
-            databaseService.deleteStoredQuery(Long.valueOf(text));
+            databaseService.deleteStoredQuery(Long.valueOf(text), database);
             return SUCCESS_MESSAGE;
         } catch (NumberFormatException e) {
             return NOT_FOUND;

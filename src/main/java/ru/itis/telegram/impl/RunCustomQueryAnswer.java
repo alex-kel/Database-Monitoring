@@ -11,8 +11,8 @@ import ru.itis.telegram.exception.DoTaskException;
 public class RunCustomQueryAnswer extends BaseAnswer {
 
     @Override
-    String getText(String text, Chat chat) throws DoTaskException {
-        return "Результат: " + databaseService.runCustomQuery(text);
+    String getText(String text, Chat chat, Long database) throws DoTaskException {
+        return "Результат: " + databaseService.runCustomQuery(text, database);
     }
 
     @Override

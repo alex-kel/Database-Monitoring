@@ -15,36 +15,36 @@ import java.util.List;
 @Service
 public class DatabaseService implements IDatabaseService {
 
-    @Autowired
+    @Autowired(required = false)
     private IQueryService queryService;
 
     @Override
-    public List<Query> getQueries() throws DoTaskException {
+    public List<Query> getQueries(Long database) throws DoTaskException {
         return queryService.getAllQueries();
     }
 
     @Override
-    public String runCustomQuery(String query) throws DoTaskException {
+    public String runCustomQuery(String query, Long database) throws DoTaskException {
         return null;
     }
 
     @Override
-    public String runStoredQuery(Long id) throws DoTaskException {
+    public String runStoredQuery(Long id, Long database) throws DoTaskException {
         return null;
     }
 
     @Override
-    public void storeNewQuery(String text) throws DoTaskException {
+    public void storeNewQuery(String text, Long database) throws DoTaskException {
 
     }
 
     @Override
-    public void deleteStoredQuery(Long id) throws DoTaskException {
+    public void deleteStoredQuery(Long id, Long database) throws DoTaskException {
 
     }
 
     @Override
-    public Query getQuery(Long id) throws DoTaskException {
+    public Query getQuery(Long id, Long database) throws DoTaskException {
         return null;
     }
 

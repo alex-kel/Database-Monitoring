@@ -15,9 +15,9 @@ public class ShowStoredQueryAnswer extends BaseAnswer {
     private static final String NOT_FOUND = "SQL Запрос не найден";
 
     @Override
-    String getText(String text, Chat chat) throws DoTaskException {
+    String getText(String text, Chat chat, Long database) throws DoTaskException {
         try {
-            return Optional.ofNullable(databaseService.getQuery(Long.valueOf(text)))
+            return Optional.ofNullable(databaseService.getQuery(Long.valueOf(text), database))
                     .map(query -> String.format("%d. %s : %s", query.getId(),
                             query.getName(), query.getStatement()))
                     .orElse(NOT_FOUND);
