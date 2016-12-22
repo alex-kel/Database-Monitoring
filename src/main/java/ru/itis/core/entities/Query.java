@@ -13,10 +13,14 @@ public class Query implements Serializable{
 
     private Long id;
 
-    @Column
     private String name;
 
     private String statement;
+
+    public Query(String name, String statement) {
+        this.name = name;
+        this.statement = statement;
+    }
 
     public Long getId() {
         return id;

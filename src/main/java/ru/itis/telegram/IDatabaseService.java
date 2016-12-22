@@ -42,11 +42,11 @@ public interface IDatabaseService {
     /**
      * Сохраняет новый SQL запрос
      *
-     * @param text SQL запрос
+     * @param query SQL запрос
      * @param database база данных для запроса
      * @throws DoTaskException ошибка при сохранении запроса
      */
-    void storeNewQuery(String text, Long database) throws DoTaskException;
+    void storeNewQuery(Query query, Long database) throws DoTaskException;
 
     /**
      * Удаляет SQL запрос

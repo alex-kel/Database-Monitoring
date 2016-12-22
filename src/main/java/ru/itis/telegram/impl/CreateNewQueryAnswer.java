@@ -2,6 +2,7 @@ package ru.itis.telegram.impl;
 
 import com.pengrad.telegrambot.model.Chat;
 import org.springframework.stereotype.Component;
+import ru.itis.core.entities.Query;
 import ru.itis.telegram.exception.DoTaskException;
 
 /**
@@ -14,7 +15,7 @@ public class CreateNewQueryAnswer extends BaseAnswer {
 
     @Override
     String getText(String text, Chat chat, Long database) throws DoTaskException {
-        databaseService.storeNewQuery(text, database);
+        databaseService.storeNewQuery(new Query("name", text), database);
         return SUCCESS_MESSAGE;
     }
 
