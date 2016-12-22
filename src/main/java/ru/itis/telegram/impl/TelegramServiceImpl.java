@@ -14,10 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.itis.telegram.AnswersFactory;
-import ru.itis.telegram.ITelegramService;
-import ru.itis.telegram.KeyboardUtil;
-import ru.itis.telegram.MessagesHolder;
+import ru.itis.telegram.*;
 import ru.itis.telegram.exception.DoTaskException;
 import ru.itis.telegram.models.LastMessage;
 import ru.itis.telegram.models.MessageData;
@@ -45,6 +42,9 @@ public class TelegramServiceImpl implements ITelegramService {
 
     @Autowired
     private MessagesHolder messagesHolder;
+
+    @Autowired
+    private IDatabaseService databaseService;
 
     @PostConstruct
     private void updateMessages() {
@@ -91,6 +91,7 @@ public class TelegramServiceImpl implements ITelegramService {
             }
             logger.info("Determine type: {}, chat {}", type != null ? type.name() : null, chat.id());
             request = factory.getByType(type).process(chat, text, database, data);
+            databaseService.addIfNotExist(chat.id(), chat.username(), chat.firstName(), chat.lastName());
         } catch (DoTaskException e) {
             request = getErrorAnswer(chat, e.getMessage());
             logger.error("Error {}, when processing message: {}, chat: {}", e.getMessage(),
