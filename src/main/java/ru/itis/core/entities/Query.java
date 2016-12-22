@@ -22,6 +22,15 @@ public class Query implements Serializable{
         this.statement = statement;
     }
 
+    public Query(Long id, String name, String statement) {
+        this.id = id;
+        this.name = name;
+        this.statement = statement;
+    }
+
+    public Query() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -44,26 +53,5 @@ public class Query implements Serializable{
 
     public void setStatement(String statement) {
         this.statement = statement;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Query query = (Query) o;
-
-        if (!id.equals(query.id)) return false;
-        if (!name.equals(query.name)) return false;
-        return statement.equals(query.statement);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + statement.hashCode();
-        return result;
     }
 }
