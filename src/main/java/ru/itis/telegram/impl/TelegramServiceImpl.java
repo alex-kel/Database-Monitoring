@@ -66,6 +66,7 @@ public class TelegramServiceImpl implements ITelegramService {
             LastMessage lastMessage = getLastMessage(chat);
             MessageType type;
             Long database = null;
+            String data = null;
             if (lastMessage == null) {
                 type = MessageType.typeByMessage(text);
                 if (type.getNextType() != null) {
@@ -75,13 +76,21 @@ public class TelegramServiceImpl implements ITelegramService {
                 type = lastMessage.getType().getNextType();
                 if (lastMessage.getType().isDatabase()) {
                     database = Long.valueOf(text);
-                } else {
+                } else if (lastMessage.getType().isHasData()) {
+                    data = text;
+                }
+                if (database == null) {
                     database = lastMessage.getDatabase();
                 }
-                messagesHolder.putMessage(chat.id(), type, database);
+                if (data == null) {
+                    data = lastMessage.getData();
+                }
+                if (type.getNextType() != null) {
+                    messagesHolder.putMessage(chat.id(), type, database, data);
+                }
             }
             logger.info("Determine type: {}, chat {}", type != null ? type.name() : null, chat.id());
-            request = factory.getByType(type).process(chat, text, database);
+            request = factory.getByType(type).process(chat, text, database, data);
         } catch (DoTaskException e) {
             request = getErrorAnswer(chat, e.getMessage());
             logger.error("Error {}, when processing message: {}, chat: {}", e.getMessage(),

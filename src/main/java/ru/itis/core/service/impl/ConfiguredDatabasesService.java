@@ -26,6 +26,17 @@ public class ConfiguredDatabasesService {
     // ID - datasource
     private Map<Long, DataSource> datasources;
 
+    public Map<Long, Configuration.Database> dumpAvailableDatabases() {
+        Map<Long, Configuration.Database> databaseMap = new HashMap<>();
+        Configuration.Database da1 = new Configuration.Database();
+        da1.setName("name1");
+        Configuration.Database da2 = new Configuration.Database();
+        da2.setName("name2");
+        databaseMap.put(1L, da1);
+        databaseMap.put(2L, da2);
+        return databaseMap;
+    }
+
     public Map<Long, Configuration.Database> getAvailableDatabases() {
         if (databaseMap == null) {
             fillDatabasesAndDataSources();

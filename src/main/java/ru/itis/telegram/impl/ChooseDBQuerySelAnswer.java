@@ -16,9 +16,9 @@ public class ChooseDBQuerySelAnswer extends BaseAnswer{
     private ConfiguredDatabasesService databasesService;
 
     @Override
-    protected String getText(String text, Chat chat, Long database) throws DoTaskException {
+    protected String getText(String text, Chat chat, Long database, String data) throws DoTaskException {
         final String[] databases = {""};
-        databasesService.getAvailableDatabases().entrySet()
+        databasesService.dumpAvailableDatabases().entrySet()
                 .forEach(s2 -> databases[0] += String.format("%d: %s\n", s2.getKey(), s2.getValue().getName()));
         return "Выберите базу данных: \n" + databases[0];
     }

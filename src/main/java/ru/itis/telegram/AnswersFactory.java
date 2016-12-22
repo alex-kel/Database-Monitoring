@@ -37,6 +37,8 @@ public class AnswersFactory {
     private ShowStoredQuerySelAnswer showStoredQuerySelAnswer;
     @Autowired
     private ChooseDBQuerySelAnswer chooseDBQuerySelAnswer;
+    @Autowired
+    private CreateNewQueryName createNewQueryName;
 
     public IAnswer getByType(MessageType type) {
         if (type == null) {
@@ -65,6 +67,8 @@ public class AnswersFactory {
                 return showStoredQuerySelAnswer;
             case SHOW_STORED_QUERY:
                 return showStoredQueryAnswer;
+            case CREATE_NEW_QUERY_NAME:
+                return createNewQueryName;
             case CHOOSE_DATABASE_CUSTOM_QUERY:
             case CHOOSE_DATABASE_RUN_STORED_QUERY:
             case CHOOSE_DATABASE_NEW_QUERY:

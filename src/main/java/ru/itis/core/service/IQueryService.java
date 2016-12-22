@@ -13,7 +13,7 @@ public interface IQueryService {
 
     String getQuery(Long queryId, Long databaseId);
 
-    void storeNewQuery(String query, Long databaseId);
+    void storeNewQuery(Query query, Long databaseId);
 
     void deleteStoredQuery(Long queryId, Long databaseId);
 }

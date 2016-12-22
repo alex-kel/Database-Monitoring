@@ -21,14 +21,14 @@ public abstract class BaseAnswer implements IAnswer{
     @Autowired
     protected IDatabaseService databaseService;
 
-    abstract String getText(String text, Chat chat, Long database) throws DoTaskException;
+    abstract String getText(String text, Chat chat, Long database, String data) throws DoTaskException;
 
     abstract boolean withStartKeyboard();
 
     @Override
-    public SendMessage process(Chat chat, String text, Long database) throws DoTaskException {
+    public SendMessage process(Chat chat, String text, Long database, String data) throws DoTaskException {
         databaseService.addIfNotExist(chat.id(), chat.username(), chat.firstName(), chat.lastName());
-        SendMessage message = new SendMessage(chat.id(), getText(text, chat, database))
+        SendMessage message = new SendMessage(chat.id(), getText(text, chat, database, data))
                 .parseMode(ParseMode.HTML)
                 .disableWebPagePreview(true);
         if (withStartKeyboard()) {

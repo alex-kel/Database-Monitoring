@@ -8,16 +8,18 @@ import ru.itis.telegram.exception.DoTaskException;
  * Created by Aydar Farrakhov on 10.11.16.
  */
 @Component
-public class RunCustomQueryAnswer extends BaseAnswer {
+public class CreateNewQueryName extends BaseAnswer {
+
 
     @Override
     String getText(String text, Chat chat, Long database, String data) throws DoTaskException {
-        return "Результат: " + databaseService.runCustomQuery(text, database);
+        return "Введите имя запроса";
     }
 
     @Override
     boolean withStartKeyboard() {
         return true;
     }
+
 
 }

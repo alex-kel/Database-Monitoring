@@ -44,8 +44,8 @@ public class DatabaseService implements IDatabaseService {
     }
 
     @Override
-    public void storeNewQuery(String text, Long database) throws DoTaskException {
-        queryService.storeNewQuery(text, database);
+    public void storeNewQuery(Query query, Long database) throws DoTaskException {
+        queryService.storeNewQuery(query, database);
     }
 
     @Override

@@ -28,8 +28,8 @@ public class MessagesHolder {
         messages.put(chatId, new LastMessage(type, chatId));
     }
 
-    public void putMessage(Long chatId, MessageType type, Long database) {
-        messages.put(chatId, new LastMessage(type, chatId, database));
+    public void putMessage(Long chatId, MessageType type, Long database, String data) {
+        messages.put(chatId, new LastMessage(type, chatId, database, data));
     }
 
     public void removeMessage(Long chatId) {

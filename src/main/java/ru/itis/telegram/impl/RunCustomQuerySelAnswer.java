@@ -12,7 +12,7 @@ public class RunCustomQuerySelAnswer extends BaseAnswer {
 
 
     @Override
-    String getText(String text, Chat chat, Long database) throws DoTaskException {
+    String getText(String text, Chat chat, Long database, String data) throws DoTaskException {
         return "Введите SQL запрос";
     }
 

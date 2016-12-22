@@ -15,17 +15,20 @@ public class LastMessage {
 
     private Long database;
 
+    private String data;
+
     public LastMessage(MessageType type, long chatId) {
         this.type = type;
         this.created = new Date();
         this.chatId = chatId;
     }
 
-    public LastMessage(MessageType type, Long chatId, Long database) {
+    public LastMessage(MessageType type, Long chatId, Long database, String data) {
         this.type = type;
         this.created = new Date();
         this.chatId = chatId;
         this.database = database;
+        this.data = data;
     }
 
     public MessageType getType() {
@@ -58,5 +61,9 @@ public class LastMessage {
 
     public void setDatabase(Long database) {
         this.database = database;
+    }
+
+    public String getData() {
+        return data;
     }
 }

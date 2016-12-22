@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class CreateNewQuerySelAnswer extends BaseAnswer {
 
     @Override
-    String getText(String text, Chat chat, Long database) {
+    String getText(String text, Chat chat, Long database, String data) {
         return "Введите новый SQL запрос.";
     }
 
