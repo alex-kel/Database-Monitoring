@@ -3,11 +3,13 @@ package ru.itis.core.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import ru.itis.core.constants.CommonConstants;
 import ru.itis.core.entities.Query;
 import ru.itis.core.service.IQueryService;
 import ru.itis.telegram.IDatabaseService;
 import ru.itis.telegram.exception.DoTaskException;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +40,7 @@ public class DatabaseService implements IDatabaseService {
     @Override
     public String runStoredQuery(Long id, Long database) throws DoTaskException {
         JdbcTemplate jdbcTemplate = configuredDatabasesService.getJdbcTemplateForDb(database);
-        String query = queryService.getQuery(id, database);
+        String query = queryService.getQuery(id, database).getStatement();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query);
         return getResult(rows);
     }
@@ -55,12 +57,19 @@ public class DatabaseService implements IDatabaseService {
 
     @Override
     public Query getQuery(Long id, Long database) throws DoTaskException {
-        return null;
+        return queryService.getQuery(id, database);
     }
 
     @Override
     public void addIfNotExist(Long id, String username, String firstName, String lastName) throws DoTaskException {
-
+        Map<Long, DataSource> dataSources = configuredDatabasesService.getAvailableDatasources();
+        dataSources.entrySet().forEach(entry -> {
+            JdbcTemplate jdbcTemplate = new JdbcTemplate(entry.getValue());
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.IS_TELEGRAM_USER_EXISTS_QUERY, id, username);
+            if (rows.isEmpty()) {
+                jdbcTemplate.update(CommonConstants.INSERT_NEW_TELEGRAM_USER_QUERY, id, username, firstName, lastName);
+            }
+        });
     }
 
     private String getResult(List<Map<String, Object>> rows)  {

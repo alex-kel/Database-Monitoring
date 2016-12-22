@@ -11,7 +11,7 @@ public interface IQueryService {
 
     List<Query> getAllQueries();
 
-    String getQuery(Long queryId, Long databaseId);
+    Query getQuery(Long queryId, Long databaseId);
 
     void storeNewQuery(Query query, Long databaseId);
 

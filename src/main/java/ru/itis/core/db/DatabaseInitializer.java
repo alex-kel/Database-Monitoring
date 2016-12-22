@@ -1,11 +1,14 @@
 package ru.itis.core.db;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.itis.core.service.impl.ConfiguredDatabasesService;
 import ru.itis.core.util.DbUtils;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -24,18 +27,16 @@ public class DatabaseInitializer {
         initDatabase(entry.getValue());
       } catch (SQLException e) {
         e.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     }
   }
 
-  private void initDatabase(DataSource dataSource) throws SQLException {
+  private void initDatabase(DataSource dataSource) throws SQLException, IOException {
     if (!isSchemaExists(dataSource)) {
-      initSchema();
+      initSchema(dataSource);
       loadStatements();
-    } else {
-      if (!statementsWereLoaded()) {
-        loadStatements();
-      }
     }
   }
 
@@ -43,12 +44,10 @@ public class DatabaseInitializer {
     return DbUtils.isAppSchemaAvailable(dataSource);
   }
 
-  private boolean statementsWereLoaded() {
-    return true;
-  }
-
-  private void initSchema() {
-
+  private void initSchema(DataSource dataSource) throws IOException {
+    String schemaScript = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("statements/initial_script.sql"));
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    jdbcTemplate.update(schemaScript);
   }
 
   private void loadStatements() {
