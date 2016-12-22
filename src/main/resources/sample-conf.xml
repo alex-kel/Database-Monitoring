@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <databases>
-
         <database>
             <name>my_db</name>
             <type>Postgres</type>
-            <connection>connection-string</connection>
-            <user></user>
-            <password></password>
-            <bot>bot_name</bot>
+            <connection>jdbc:postgresql://localhost:5432/Receipts</connection>
+            <user>postgres</user>
+            <password>postgres</password>
+            <bot>test_db_managing_bot</bot>
             <health-check-timeout>10000</health-check-timeout>
         </database>
-
         <database>
             <name>prod_db</name>
             <type>Postgres</type>
-            <connection>connection-string</connection>
-            <user></user>
-            <password></password>
-            <bot>bot_name</bot>
+            <connection>jdbc:postgresql://localhost:5432/postgres</connection>
+            <user>postgres</user>
+            <password>postgres</password>
+            <bot>test_db_managing_bot</bot>
             <health-check-timeout>10000</health-check-timeout>
         </database>
-
-    </databases>
 </configuration>

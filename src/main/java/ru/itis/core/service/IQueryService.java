@@ -9,5 +9,11 @@ import java.util.List;
  */
 public interface IQueryService {
 
-    public List<Query> getAllQueries();
+    List<Query> getAllQueries();
+
+    String getQuery(Long queryId, Long databaseId);
+
+    void storeNewQuery(String query, Long databaseId);
+
+    void deleteStoredQuery(Long queryId, Long databaseId);
 }

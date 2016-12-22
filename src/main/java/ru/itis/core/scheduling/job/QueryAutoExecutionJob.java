@@ -19,6 +19,8 @@ public class QueryAutoExecutionJob implements Job {
     private long queryId;
     private long databeaseId;
 
+    public QueryAutoExecutionJob() {}
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         DataSource dataSource = configuredDatabasesService.getDatasourceByDatabaseId(databeaseId);

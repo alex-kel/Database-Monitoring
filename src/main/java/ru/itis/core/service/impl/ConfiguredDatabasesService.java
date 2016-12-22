@@ -1,6 +1,7 @@
 package ru.itis.core.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.stereotype.Service;
 import ru.itis.configuration.ConfigurationHolder;
@@ -51,6 +52,11 @@ public class ConfiguredDatabasesService {
             fillDatabasesAndDataSources();
         }
         return datasources.get(id);
+    }
+
+    public JdbcTemplate getJdbcTemplateForDb(long databaseId) {
+        DataSource dataSource = getDatasourceByDatabaseId(databaseId);
+        return new JdbcTemplate(dataSource);
     }
 
     private void fillDatabasesAndDataSources() {

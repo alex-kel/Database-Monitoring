@@ -37,8 +37,6 @@ public class QuartzScheduler {
         JobDataMap jobDataMap = jobDetail.getJobDataMap();
         jobDataMap.putAsString("DatabaseId", databaseId);
         jobDataMap.putAsString("QueryId", queryId);
-        //TODO: add job params to jobdetails.jobDataMap
-        QueryAutoExecutionJob job = new QueryAutoExecutionJob();
         scheduler.scheduleJob(jobDetail, trigger);
     }
 }
