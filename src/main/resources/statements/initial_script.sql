@@ -33,7 +33,8 @@ INSERT INTO monitoring_schema.condition_sign (id, condition_sign) VALUES
   (3, '>='),
   (4, '>'),
   (5, '!='),
-  (6, 'like');
+  (6, '='),
+  (7, 'like');
 
 CREATE sequence  monitoring_schema.condition_id_seq;
 CREATE TABLE monitoring_schema.condition (
