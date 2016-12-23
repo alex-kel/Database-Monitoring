@@ -5,14 +5,15 @@ package ru.itis.core.entities;
  */
 public class Schedule {
 
-    private long id, query_id, intervalInSeconds;
+    private long id, queryId;
+    private int intervalInSeconds;
 
     public Schedule() {
     }
 
-    public Schedule(long id, long query_id, long intervalInSeconds) {
+    public Schedule(long id, long queryId, int intervalInSeconds) {
         this.id = id;
-        this.query_id = query_id;
+        this.queryId = queryId;
         this.intervalInSeconds = intervalInSeconds;
     }
 
@@ -24,19 +25,19 @@ public class Schedule {
         this.id = id;
     }
 
-    public long getQuery_id() {
-        return query_id;
+    public long getQueryId() {
+        return queryId;
     }
 
-    public void setQuery_id(long query_id) {
-        this.query_id = query_id;
+    public void setQueryId(long query_id) {
+        this.queryId = queryId;
     }
 
-    public long getIntervalInSeconds() {
+    public int getIntervalInSeconds() {
         return intervalInSeconds;
     }
 
-    public void setIntervalInSeconds(long intervalInSeconds) {
+    public void setIntervalInSeconds(int intervalInSeconds) {
         this.intervalInSeconds = intervalInSeconds;
     }
 }

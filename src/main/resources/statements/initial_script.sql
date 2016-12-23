@@ -38,11 +38,12 @@ INSERT INTO monitoring_schema.condition_sign (id, condition_sign) VALUES
 
 CREATE sequence  monitoring_schema.condition_id_seq;
 CREATE TABLE monitoring_schema.condition (
-  id                INT DEFAULT NEXTVAL('monitoring_schema.condition_id_seq') PRIMARY KEY NOT NULL  ,
-  condition_sign_id INT REFERENCES monitoring_schema.condition_sign ON DELETE CASCADE ON UPDATE CASCADE,
-  condition_value        VARCHAR(200)    NOT NULL,
-  query_id          INT REFERENCES monitoring_schema.query ON DELETE CASCADE ON UPDATE CASCADE,
-  alert_text        VARCHAR(200)    NOT NULL
+  id                      INT DEFAULT NEXTVAL('monitoring_schema.condition_id_seq') PRIMARY KEY NOT NULL  ,
+  condition_sign_id       INT REFERENCES monitoring_schema.condition_sign ON DELETE CASCADE ON UPDATE CASCADE,
+  condition_value         VARCHAR(200)    NOT NULL,
+  query_id                INT REFERENCES monitoring_schema.query ON DELETE CASCADE ON UPDATE CASCADE,
+  alert_text              VARCHAR(200)    NOT NULL,
+  is_alert_already_sent   INT DEFAULT 0 NOT NULL
 );
 
 CREATE TABLE monitoring_schema.user (

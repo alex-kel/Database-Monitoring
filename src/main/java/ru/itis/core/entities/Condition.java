@@ -5,17 +5,20 @@ package ru.itis.core.entities;
  */
 public class Condition {
 
-    private long id, query_id;
-    private String conditionType, alertText;
+    private long id, queryId, conditionSignId;
+    private String alertText, conditionValue;
+    private int isAlertAlreadySent;
 
     public Condition() {
     }
 
-    public Condition(long id, long query_id, String conditionType, String alertText) {
+    public Condition(long id, long conditionSignId, String conditionValue, long queryId, String alertText, int isAlertAlreadySent) {
         this.id = id;
-        this.query_id = query_id;
-        this.conditionType = conditionType;
+        this.conditionSignId = conditionSignId;
+        this.conditionValue = conditionValue;
+        this.queryId = queryId;
         this.alertText = alertText;
+        this.isAlertAlreadySent = isAlertAlreadySent;
     }
 
     public long getId() {
@@ -26,20 +29,12 @@ public class Condition {
         this.id = id;
     }
 
-    public long getQuery_id() {
-        return query_id;
+    public long getQueryId() {
+        return queryId;
     }
 
-    public void setQuery_id(long query_id) {
-        this.query_id = query_id;
-    }
-
-    public String getConditionType() {
-        return conditionType;
-    }
-
-    public void setConditionType(String conditionType) {
-        this.conditionType = conditionType;
+    public void setQueryId(long queryId) {
+        this.queryId = queryId;
     }
 
     public String getAlertText() {
@@ -48,5 +43,29 @@ public class Condition {
 
     public void setAlertText(String alertText) {
         this.alertText = alertText;
+    }
+
+    public int getIsAlertAlreadySent() {
+        return isAlertAlreadySent;
+    }
+
+    public void setIsAlertAlreadySent(int isAlertAlreadySent) {
+        this.isAlertAlreadySent = isAlertAlreadySent;
+    }
+
+    public long getConditionSignId() {
+        return conditionSignId;
+    }
+
+    public void setConditionSignId(long conditionSignId) {
+        this.conditionSignId = conditionSignId;
+    }
+
+    public String getConditionValue() {
+        return conditionValue;
+    }
+
+    public void setConditionValue(String conditionValue) {
+        this.conditionValue = conditionValue;
     }
 }
