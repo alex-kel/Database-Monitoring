@@ -3,6 +3,8 @@ package ru.itis.core.scheduling.job;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import ru.itis.core.entities.Condition;
@@ -22,6 +24,8 @@ import java.util.regex.Pattern;
  * Created by Alex on 21.12.16.
  */
 public class QueryAutoExecutionJob implements Job {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ConfiguredDatabasesService configuredDatabasesService;
@@ -45,6 +49,7 @@ public class QueryAutoExecutionJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        logger.debug("Executing job for query #" + queryId + "and db #" + databaseId);
         JdbcTemplate jdbcTemplate = configuredDatabasesService.getJdbcTemplateForDb(databaseId);
         Query query = queryService.getQuery(queryId, databaseId);
         String result = ((String) jdbcTemplate.queryForObject(query.getStatement(), String.class)).trim();

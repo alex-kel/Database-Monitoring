@@ -44,6 +44,7 @@ public class Runner implements CommandLineRunner {
     }
 
     private void readXmlConfiguration(String fileName) throws JAXBException {
+        logger.info("Reading xml configuration");
         JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         File file = new File(fileName);

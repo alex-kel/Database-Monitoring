@@ -2,6 +2,8 @@ package ru.itis.core.db;
 
 import org.apache.commons.io.IOUtils;
 import org.quartz.SchedulerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,6 +26,8 @@ import java.util.Map;
 @Component
 public class DatabaseInitializer {
 
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
   @Autowired
   private ConfiguredDatabasesService configuredDatabasesService;
 
@@ -33,13 +37,12 @@ public class DatabaseInitializer {
   public void initialize() {
     for (Map.Entry<Long, DataSource> entry : configuredDatabasesService.getAvailableDatasources().entrySet()) {
       try {
+        logger.info("Initializing databases");
         initDatabase(entry.getValue());
+        logger.info("Initializing scheduled queries");
         initScheduledJobs(entry.getKey());
-      } catch (SQLException e) {
-        e.printStackTrace();
-      } catch (IOException e) {
-        e.printStackTrace();
-      } catch (SchedulerException e) {
+      } catch (SQLException | IOException | SchedulerException e) {
+        logger.error(e.getMessage());
         e.printStackTrace();
       }
     }
@@ -65,12 +68,14 @@ public class DatabaseInitializer {
   }
 
   private void initSchema(DataSource dataSource) throws IOException {
+    logger.info("Initializing schema");
     String schemaScript = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("statements/initial_script.sql"));
     JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
     jdbcTemplate.update(schemaScript);
   }
 
   private void loadStatements(DataSource dataSource) throws IOException {
+    logger.info("Loading default queries");
     String statementsScript = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("statements/statements.sql"));
     JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
     jdbcTemplate.update(statementsScript);
