@@ -54,69 +54,81 @@ public class QueryAutoExecutionJob implements Job {
             String sign = conditionService.getConditionSign(databaseId, condition).trim();
             switch (sign) {
                 case "<":
-                    if (Double.valueOf(result) < Double.valueOf(conditionValue) && condition.getIsAlertAlreadySent() != 1) {
-                        sendAlertMessage(condition.getAlertText());
-                        conditionService.setAlertAlreadySent(databaseId, condition);
-                        break;
-                    }
-                    if (condition.getIsAlertAlreadySent() == 1) {
-                        conditionService.setAlertFixed(databaseId, condition);
-                        sendFixedMessageForAlert(condition.getAlertText());
+                    if (Double.valueOf(result) < Double.valueOf(conditionValue)) {
+                        if (condition.getIsAlertAlreadySent() != 1) {
+                            sendAlertMessage(condition.getAlertText());
+                            conditionService.setAlertAlreadySent(databaseId, condition);
+                        }
+                    } else {
+                        if (condition.getIsAlertAlreadySent() == 1) {
+                            conditionService.setAlertFixed(databaseId, condition);
+                            sendFixedMessageForAlert(condition.getAlertText());
+                        }
                     }
                     break;
                 case "<=":
-                    if (Double.valueOf(result) <= Double.valueOf(conditionValue) && condition.getIsAlertAlreadySent() != 1) {
-                        sendAlertMessage(condition.getAlertText());
-                        conditionService.setAlertAlreadySent(databaseId, condition);
-                        break;
-                    }
-                    if (condition.getIsAlertAlreadySent() == 1) {
-                        conditionService.setAlertFixed(databaseId, condition);
-                        sendFixedMessageForAlert(condition.getAlertText());
+                    if (Double.valueOf(result) <= Double.valueOf(conditionValue)) {
+                        if (condition.getIsAlertAlreadySent() != 1) {
+                            sendAlertMessage(condition.getAlertText());
+                            conditionService.setAlertAlreadySent(databaseId, condition);
+                        }
+                    } else {
+                        if (condition.getIsAlertAlreadySent() == 1) {
+                            conditionService.setAlertFixed(databaseId, condition);
+                            sendFixedMessageForAlert(condition.getAlertText());
+                        }
                     }
                     break;
                 case "=":
-                    if (conditionValue.equals(result) && condition.getIsAlertAlreadySent() != 1) {
-                        sendAlertMessage(condition.getAlertText());
-                        conditionService.setAlertAlreadySent(databaseId, condition);
-                        break;
-                    }
-                    if (condition.getIsAlertAlreadySent() == 1) {
-                        conditionService.setAlertFixed(databaseId, condition);
-                        sendFixedMessageForAlert(condition.getAlertText());
+                    if (conditionValue.equals(result)) {
+                        if (condition.getIsAlertAlreadySent() != 1) {
+                            sendAlertMessage(condition.getAlertText());
+                            conditionService.setAlertAlreadySent(databaseId, condition);
+                        }
+                    } else {
+                        if (condition.getIsAlertAlreadySent() == 1) {
+                            conditionService.setAlertFixed(databaseId, condition);
+                            sendFixedMessageForAlert(condition.getAlertText());
+                        }
                     }
                     break;
                 case ">=":
-                    if (Double.valueOf(result) >= Double.valueOf(conditionValue) && condition.getIsAlertAlreadySent() != 1) {
-                        sendAlertMessage(condition.getAlertText());
-                        conditionService.setAlertAlreadySent(databaseId, condition);
-                        break;
-                    }
-                    if (condition.getIsAlertAlreadySent() == 1) {
-                        conditionService.setAlertFixed(databaseId, condition);
-                        sendFixedMessageForAlert(condition.getAlertText());
+                    if (Double.valueOf(result) >= Double.valueOf(conditionValue)) {
+                        if (condition.getIsAlertAlreadySent() != 1) {
+                            sendAlertMessage(condition.getAlertText());
+                            conditionService.setAlertAlreadySent(databaseId, condition);
+                        }
+                    } else {
+                        if (condition.getIsAlertAlreadySent() == 1) {
+                            conditionService.setAlertFixed(databaseId, condition);
+                            sendFixedMessageForAlert(condition.getAlertText());
+                        }
                     }
                     break;
                 case ">":
-                    if (Double.valueOf(result) < Double.valueOf(conditionValue) && condition.getIsAlertAlreadySent() != 1) {
-                        sendAlertMessage(condition.getAlertText());
-                        conditionService.setAlertAlreadySent(databaseId, condition);
-                        break;
-                    }
-                    if (condition.getIsAlertAlreadySent() == 1) {
-                        conditionService.setAlertFixed(databaseId, condition);
-                        sendFixedMessageForAlert(condition.getAlertText());
+                    if (Double.valueOf(result) > Double.valueOf(conditionValue)) {
+                        if (condition.getIsAlertAlreadySent() != 1) {
+                            sendAlertMessage(condition.getAlertText());
+                            conditionService.setAlertAlreadySent(databaseId, condition);
+                        }
+                    } else {
+                        if (condition.getIsAlertAlreadySent() == 1) {
+                            conditionService.setAlertFixed(databaseId, condition);
+                            sendFixedMessageForAlert(condition.getAlertText());
+                        }
                     }
                     break;
                 case "!=":
-                    if (!conditionValue.equals(result) && condition.getIsAlertAlreadySent() != 1) {
-                        sendAlertMessage(condition.getAlertText());
-                        conditionService.setAlertAlreadySent(databaseId, condition);
-                        break;
-                    }
-                    if (condition.getIsAlertAlreadySent() == 1) {
-                        conditionService.setAlertFixed(databaseId, condition);
-                        sendFixedMessageForAlert(condition.getAlertText());
+                    if (!conditionValue.equals(result)) {
+                        if (condition.getIsAlertAlreadySent() != 1) {
+                            sendAlertMessage(condition.getAlertText());
+                            conditionService.setAlertAlreadySent(databaseId, condition);
+                        }
+                    } else {
+                        if (condition.getIsAlertAlreadySent() == 1) {
+                            conditionService.setAlertFixed(databaseId, condition);
+                            sendFixedMessageForAlert(condition.getAlertText());
+                        }
                     }
                     break;
                 case "like":
@@ -143,7 +155,7 @@ public class QueryAutoExecutionJob implements Job {
     private void sendFixedMessageForAlert(String alertText) {
         List<User> users = userService.getAllChats(databaseId);
         for (User user : users) {
-            telegramService.sendMessage(new MessageData(user.getId(), "Следующая проблема была успешно устранена" + alertText));
+            telegramService.sendMessage(new MessageData(user.getId(), "Следующая проблема была успешно устранена: \n" + alertText));
         }
     }
 

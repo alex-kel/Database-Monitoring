@@ -19,8 +19,8 @@ CREATE TABLE monitoring_schema.query (
 CREATE sequence  monitoring_schema.schedule_id_seq;
 CREATE TABLE monitoring_schema.schedule (
   id                  INT DEFAULT NEXTVAL('monitoring_schema.schedule_id_seq') PRIMARY KEY NOT NULL ,
-  interval_in_seconds INT             NOT NULL,
-  query_id            INT REFERENCES monitoring_schema.query ON DELETE CASCADE ON UPDATE CASCADE
+  query_id            INT REFERENCES monitoring_schema.query ON DELETE CASCADE ON UPDATE CASCADE,
+  interval_in_seconds INT             NOT NULL
 );
 
 CREATE TABLE monitoring_schema.condition_sign (

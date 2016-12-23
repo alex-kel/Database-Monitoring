@@ -3,6 +3,7 @@ package ru.itis.core.scheduling;
 import org.quartz.*;
 import org.quartz.impl.StdScheduler;
 import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.itis.core.scheduling.job.QueryAutoExecutionJob;
 
@@ -16,21 +17,25 @@ public class QuartzScheduler {
 
     private Scheduler scheduler;
 
-    public QuartzScheduler() throws SchedulerException {
-        Scheduler scheduler = new StdSchedulerFactory().getScheduler();
-        scheduler.setJobFactory(new AutowiringSpringBeanJobFactory());
+    @Autowired
+    private AutowiringSpringBeanJobFactory jobFactory;
+
+    @PostConstruct
+    public void createScheduler() throws SchedulerException {
+        scheduler = new StdSchedulerFactory().getScheduler();
+        scheduler.setJobFactory(jobFactory);
         scheduler.start();
     }
 
     public void scheduleQueryExecution(long databaseId, long queryId, int intervalInSeconds) throws SchedulerException {
-        Trigger trigger = TriggerBuilder.newTrigger().
-                withIdentity("everySecondsIntervalTrigger").
-                withSchedule(
-                        SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(intervalInSeconds).repeatForever()).
-                build();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(databaseId);
         stringBuilder.append("#" + queryId);
+        Trigger trigger = TriggerBuilder.newTrigger().
+                withIdentity("everySecondsIntervalTrigger" + stringBuilder.toString()).
+                withSchedule(
+                        SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(intervalInSeconds).repeatForever()).
+                build();
         JobDetail jobDetail = JobBuilder.newJob(QueryAutoExecutionJob.class).
                 withIdentity(stringBuilder.toString()).
                 build();

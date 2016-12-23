@@ -29,7 +29,7 @@ public class Schedule {
         return queryId;
     }
 
-    public void setQueryId(long query_id) {
+    public void setQueryId(long queryId) {
         this.queryId = queryId;
     }
 

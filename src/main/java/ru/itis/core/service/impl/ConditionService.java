@@ -1,11 +1,14 @@
 package ru.itis.core.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import ru.itis.core.constants.CommonConstants;
 import ru.itis.core.entities.Condition;
 import ru.itis.core.service.IConditionService;
+
+import java.util.List;
 
 /**
  * Created by Alex on 23.12.16.
@@ -19,7 +22,8 @@ public class ConditionService implements IConditionService {
     @Override
     public Condition getConditionForQuery(long databaseId, long queryId) {
         JdbcTemplate jdbcTemplate = configuredDatabasesService.getJdbcTemplateForDb(databaseId);
-        return (Condition) jdbcTemplate.queryForObject(CommonConstants.GET_CONDITION_FOR_QUERY_ID, Condition.class, queryId);
+        List<Condition> list = jdbcTemplate.query(CommonConstants.GET_CONDITION_FOR_QUERY_ID, new BeanPropertyRowMapper(Condition.class), queryId);
+        return list.isEmpty() ? null : list.get(0);
     }
 
     @Override
