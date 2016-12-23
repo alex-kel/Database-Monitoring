@@ -22,7 +22,7 @@ public interface CommonConstants {
 
   //Users
   String GET_ALL_USERS = "SELECT * FROM monitoring_schema.user";
-  String REMOVE_TELEGRAM_USER_QUERY = "DELETE FROM monitoring_shema.user u WHERE u.id = ?";
+  String REMOVE_TELEGRAM_USER_QUERY = "DELETE FROM monitoring_schema.user u WHERE u.id = ?";
 
   //Condition
   String GET_CONDITION_FOR_QUERY_ID = "SELECT * FROM monitoring_schema.condition c WHERE c.query_id = ?";

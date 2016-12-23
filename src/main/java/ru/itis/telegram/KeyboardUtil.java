@@ -18,7 +18,8 @@ public class KeyboardUtil {
         return new ReplyKeyboardMarkup(
                 new KeyboardButton[]{buttons.get(0), buttons.get(1)},
                 new KeyboardButton[]{buttons.get(2), buttons.get(3)},
-                new KeyboardButton[]{buttons.get(4), buttons.get(5)}
+                new KeyboardButton[]{buttons.get(4), buttons.get(5)},
+                new KeyboardButton[]{buttons.get(6)}
         )
                 .oneTimeKeyboard(true)
                 .resizeKeyboard(true)

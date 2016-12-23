@@ -39,12 +39,16 @@ public class AnswersFactory {
     private ChooseDBQuerySelAnswer chooseDBQuerySelAnswer;
     @Autowired
     private CreateNewQueryName createNewQueryName;
+    @Autowired
+    private TurnNotificationsAnswer turnNotificationsAnswer;
 
     public IAnswer getByType(MessageType type) {
         if (type == null) {
             return startAnswer;
         }
         switch (type) {
+            case START:
+                break;
             case RUN_CUSTOM_QUERY:
                 return customQueryAnswer;
             case RUN_CUSTOM_QUERY_SEL:
@@ -69,7 +73,10 @@ public class AnswersFactory {
                 return showStoredQueryAnswer;
             case CREATE_NEW_QUERY_NAME:
                 return createNewQueryName;
+            case TURN_NOTIFICATIONS:
+                return turnNotificationsAnswer;
             case CHOOSE_DATABASE_CUSTOM_QUERY:
+            case CHOOSE_DATABASE_TURN_NOTIFICATIONS:
             case CHOOSE_DATABASE_RUN_STORED_QUERY:
             case CHOOSE_DATABASE_NEW_QUERY:
             case CHOOSE_DATABASE_DELETE:
@@ -79,5 +86,6 @@ public class AnswersFactory {
             default:
                 return startAnswer;
         }
+        return startAnswer;
     }
 }

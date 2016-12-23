@@ -23,7 +23,9 @@ public enum MessageType {
     CHOOSE_DATABASE_NEW_QUERY("Создать новый запрос", true, true, false),
     CHOOSE_DATABASE_DELETE("Удалить сохраненный запрос", true, true, false),
     CHOOSE_DATABASE_LIST_QUERIES("Список сохранненных запросов", true, true, false),
-    CHOOSE_DATABASE_SHOW_QUERY("Показать сохраненный запрос", true, true, false);
+    CHOOSE_DATABASE_SHOW_QUERY("Показать сохраненный запрос", true, true, false),
+    CHOOSE_DATABASE_TURN_NOTIFICATIONS("Отключить/включить уведомления", true, true, false),
+    TURN_NOTIFICATIONS("turn_notifications", false, false, false);
 
     MessageType(String keyWord, boolean showWhenStart, boolean database, boolean hasData) {
         this.keyWord = keyWord;
@@ -80,6 +82,8 @@ public enum MessageType {
                 return SHOW_STORED_QUERY;
             case CHOOSE_DATABASE_LIST_QUERIES:
                 return LIST_STORED_QUERY_SEL;
+            case CHOOSE_DATABASE_TURN_NOTIFICATIONS:
+                return TURN_NOTIFICATIONS;
             default:
                 return null;
         }

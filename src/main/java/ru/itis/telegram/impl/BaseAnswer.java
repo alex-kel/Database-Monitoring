@@ -27,7 +27,6 @@ public abstract class BaseAnswer implements IAnswer{
 
     @Override
     public SendMessage process(Chat chat, String text, Long database, String data) throws DoTaskException {
-        databaseService.addIfNotExist(chat.id(), chat.username(), chat.firstName(), chat.lastName());
         SendMessage message = new SendMessage(chat.id(), getText(text, chat, database, data))
                 .parseMode(ParseMode.HTML)
                 .disableWebPagePreview(true);

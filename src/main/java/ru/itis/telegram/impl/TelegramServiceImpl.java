@@ -92,7 +92,6 @@ public class TelegramServiceImpl implements ITelegramService {
             }
             logger.info("Determine type: {}, chat {}", type != null ? type.name() : null, chat.id());
             request = factory.getByType(type).process(chat, text, database, data);
-            databaseService.addIfNotExist(chat.id(), chat.username(), chat.firstName(), chat.lastName());
         } catch (DoTaskException e) {
             request = getErrorAnswer(chat, e.getMessage());
             logger.error("Error {}, when processing message: {}, chat: {}", e.getMessage(),
