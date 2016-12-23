@@ -36,7 +36,7 @@ public class DatabaseInitializer {
   private void initDatabase(DataSource dataSource) throws SQLException, IOException {
     if (!isSchemaExists(dataSource)) {
       initSchema(dataSource);
-      loadStatements();
+      loadStatements(dataSource);
     }
   }
 
@@ -50,7 +50,9 @@ public class DatabaseInitializer {
     jdbcTemplate.update(schemaScript);
   }
 
-  private void loadStatements() {
-
+  private void loadStatements(DataSource dataSource) throws IOException {
+    String statementsScript = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("statements/statements.sql"));
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    jdbcTemplate.update(statementsScript);
   }
 }
