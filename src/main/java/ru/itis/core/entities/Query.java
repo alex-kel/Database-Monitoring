@@ -19,7 +19,7 @@ public class Query implements Serializable{
 
     private String codeName;
 
-    private int dbmsTypeId;
+    private Integer dbmsTypeId;
 
     public Query(String name, String statement) {
         this.name = name;
@@ -67,11 +67,11 @@ public class Query implements Serializable{
         this.codeName = codeName;
     }
 
-    public int getDbmsTypeId() {
+    public Integer getDbmsTypeId() {
         return dbmsTypeId;
     }
 
-    public void setDbmsTypeId(int dbmsTypeId) {
+    public void setDbmsTypeId(Integer dbmsTypeId) {
         this.dbmsTypeId = dbmsTypeId;
     }
 }

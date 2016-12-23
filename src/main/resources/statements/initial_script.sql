@@ -11,9 +11,9 @@ CREATE sequence  monitoring_schema.query_id_seq;
 CREATE TABLE monitoring_schema.query (
   id        INT DEFAULT NEXTVAL('monitoring_schema.query_id_seq') PRIMARY KEY NOT NULL ,
   name      VARCHAR(200)    NOT NULL,
-  statement VARCHAR(1000)   NOT NULL,
-  code_name VARCHAR(100) NOT NULL UNIQUE ,
-  dbms_type_id INT NOT NULL REFERENCES monitoring_schema.dbms_type(id) ON DELETE CASCADE  ON UPDATE  CASCADE
+  statement VARCHAR,
+  code_name VARCHAR(100),
+  dbms_type_id INT
 );
 
 CREATE sequence  monitoring_schema.schedule_id_seq;

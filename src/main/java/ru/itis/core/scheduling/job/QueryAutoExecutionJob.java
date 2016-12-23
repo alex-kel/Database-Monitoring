@@ -138,10 +138,16 @@ public class QueryAutoExecutionJob implements Job {
                     break;
                 case "like":
                     boolean matches = Pattern.matches(conditionValue, result);
-                    if (!matches && condition.getIsAlertAlreadySent() != 1) {
-                        sendAlertMessage(condition.getAlertText());
-                        conditionService.setAlertAlreadySent(databaseId, condition);
-                        break;
+                    if (matches) {
+                        if (condition.getIsAlertAlreadySent() != 1) {
+                            sendAlertMessage(condition.getAlertText());
+                            conditionService.setAlertAlreadySent(databaseId, condition);
+                        }
+                    } else {
+                        if (condition.getIsAlertAlreadySent() == 1) {
+                            conditionService.setAlertFixed(databaseId, condition);
+                            sendFixedMessageForAlert(condition.getAlertText());
+                        }
                     }
                     break;
                 default:
