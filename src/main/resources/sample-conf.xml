@@ -6,8 +6,6 @@
             <connection>jdbc:postgresql://localhost:5432/test</connection>
             <user>postgres</user>
             <password>postgres</password>
-            <bot>test_db_managing_bot</bot>
-            <health-check-timeout>10000</health-check-timeout>
         </database>
         <!--<database>-->
             <!--<name>prod_db</name>-->
@@ -15,7 +13,5 @@
             <!--<connection>jdbc:postgresql://localhost:5432/postgres</connection>-->
             <!--<user>postgres</user>-->
             <!--<password>postgres</password>-->
-            <!--<bot>test_db_managing_bot</bot>-->
-            <!--<health-check-timeout>10000</health-check-timeout>-->
         <!--</database>-->
 </configuration>
