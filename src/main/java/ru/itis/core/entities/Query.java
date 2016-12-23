@@ -17,6 +17,10 @@ public class Query implements Serializable{
 
     private String statement;
 
+    private String codeName;
+
+    private int dbmsTypeId;
+
     public Query(String name, String statement) {
         this.name = name;
         this.statement = statement;
@@ -53,5 +57,21 @@ public class Query implements Serializable{
 
     public void setStatement(String statement) {
         this.statement = statement;
+    }
+
+    public String getCodeName() {
+        return codeName;
+    }
+
+    public void setCodeName(String codeName) {
+        this.codeName = codeName;
+    }
+
+    public int getDbmsTypeId() {
+        return dbmsTypeId;
+    }
+
+    public void setDbmsTypeId(int dbmsTypeId) {
+        this.dbmsTypeId = dbmsTypeId;
     }
 }
