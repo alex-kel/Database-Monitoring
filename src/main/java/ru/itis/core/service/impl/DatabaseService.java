@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.core.constants.CommonConstants;
 import ru.itis.core.entities.Query;
 import ru.itis.core.service.IQueryService;
-import ru.itis.telegram.IDatabaseService;
+import ru.itis.core.service.IDatabaseService;
 import ru.itis.telegram.exception.DoTaskException;
 
 import javax.sql.DataSource;
@@ -27,7 +27,7 @@ public class DatabaseService implements IDatabaseService {
 
     @Override
     public List<Query> getQueries(Long database) throws DoTaskException {
-        return queryService.getAllQueries();
+        return queryService.getAllQueries(database);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class DatabaseService implements IDatabaseService {
         Map<Long, DataSource> dataSources = configuredDatabasesService.getAvailableDatasources();
         dataSources.entrySet().forEach(entry -> {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(entry.getValue());
-            List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.IS_TELEGRAM_USER_EXISTS_QUERY, id, username);
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.IS_TELEGRAM_USER_EXISTS_QUERY, id);
             if (rows.isEmpty()) {
                 jdbcTemplate.update(CommonConstants.INSERT_NEW_TELEGRAM_USER_QUERY, id, username, firstName, lastName);
             }

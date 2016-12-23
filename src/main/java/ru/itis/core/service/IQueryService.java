@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IQueryService {
 
-    List<Query> getAllQueries();
+    List<Query> getAllQueries(Long databaseId);
 
     Query getQuery(Long queryId, Long databaseId);
 

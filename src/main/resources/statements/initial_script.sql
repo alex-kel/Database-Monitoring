@@ -24,7 +24,7 @@ CREATE TABLE monitoring_schema.condition(
 
 CREATE TABLE monitoring_schema.user(
    id INT PRIMARY KEY     NOT NULL,
-   nick varchar(50)  NOT NULL,
-   first_name varchar(50)  NOT NULL,
-   last_name varchar(100)  NOT NULL
+   nick varchar(50),
+   first_name varchar(50),
+   last_name varchar(100)
 );

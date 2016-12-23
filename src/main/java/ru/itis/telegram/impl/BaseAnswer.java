@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itis.core.entities.Query;
 import ru.itis.telegram.IAnswer;
-import ru.itis.telegram.IDatabaseService;
+import ru.itis.core.service.IDatabaseService;
 import ru.itis.telegram.KeyboardUtil;
 import ru.itis.telegram.exception.DoTaskException;
 
@@ -43,7 +43,7 @@ public abstract class BaseAnswer implements IAnswer{
 
     protected String storedQueryList(Long database) throws DoTaskException {
         List<Query> queries = databaseService.getQueries(database);
-        return "Сохраненные запросы:" + queries.stream()
+        return "Сохраненные запросы: \n" + queries.stream()
                 .map(q -> String.format("%d. %s", q.getId(), q.getName()))
                 .collect(Collectors.joining("\n"));
     }

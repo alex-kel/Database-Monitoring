@@ -1,4 +1,4 @@
-package ru.itis.telegram;
+package ru.itis.core.service;
 
 import ru.itis.core.entities.Query;
 import ru.itis.telegram.exception.DoTaskException;
