@@ -76,5 +76,7 @@ public interface IDatabaseService {
      * @param lastName Фамилия нового пользователя
      * @throws DoTaskException ошибка при добавлении пользователя
      */
-    void addIfNotExist(Long id, String username, String firstName, String lastName) throws DoTaskException;
+    void addIfNotExist(long databaseId, Long id, String username, String firstName, String lastName) throws DoTaskException;
+
+    boolean isUserAlreadyAdded(long databaseId, long chatId);
 }

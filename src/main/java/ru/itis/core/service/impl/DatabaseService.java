@@ -61,15 +61,19 @@ public class DatabaseService implements IDatabaseService {
     }
 
     @Override
-    public void addIfNotExist(Long id, String username, String firstName, String lastName) throws DoTaskException {
-        Map<Long, DataSource> dataSources = configuredDatabasesService.getAvailableDatasources();
-        dataSources.entrySet().forEach(entry -> {
-            JdbcTemplate jdbcTemplate = new JdbcTemplate(entry.getValue());
-            List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.IS_TELEGRAM_USER_EXISTS_QUERY, id);
-            if (rows.isEmpty()) {
-                jdbcTemplate.update(CommonConstants.INSERT_NEW_TELEGRAM_USER_QUERY, id, username, firstName, lastName);
-            }
-        });
+    public void addIfNotExist(long databaseId, Long id, String username, String firstName, String lastName) throws DoTaskException {
+        JdbcTemplate jdbcTemplate = configuredDatabasesService.getJdbcTemplateForDb(databaseId);
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.IS_TELEGRAM_USER_EXISTS_QUERY, id);
+        if (rows.isEmpty()) {
+            jdbcTemplate.update(CommonConstants.INSERT_NEW_TELEGRAM_USER_QUERY, id, username, firstName, lastName);
+        }
+    }
+
+    @Override
+    public boolean isUserAlreadyAdded(long databaseId, long chatId) {
+        JdbcTemplate jdbcTemplate = configuredDatabasesService.getJdbcTemplateForDb(databaseId);
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.IS_TELEGRAM_USER_EXISTS_QUERY, chatId);
+        return !rows.isEmpty();
     }
 
     private String getResult(List<Map<String, Object>> rows)  {
