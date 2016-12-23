@@ -78,5 +78,7 @@ public interface IDatabaseService {
      */
     void addIfNotExist(long databaseId, Long id, String username, String firstName, String lastName) throws DoTaskException;
 
+    void removeUser(long databaseId, long chatId);
+
     boolean isUserAlreadyAdded(long databaseId, long chatId);
 }

@@ -22,10 +22,12 @@ public interface CommonConstants {
 
   //Users
   String GET_ALL_USERS = "SELECT * FROM monitoring_schema.user";
+  String REMOVE_TELEGRAM_USER_QUERY = "DELETE FROM monitoring_shema.user u WHERE u.id = ?";
 
   //Condition
   String GET_CONDITION_FOR_QUERY_ID = "SELECT * FROM monitoring_schema.condition c WHERE c.query_id = ?";
   String GET_CONDITION_SIGN_BY_ID = "SELECT cs.condition_sign FROM monitoring_schema.condition_sign cs WHERE id = ?";
   String SET_ALERT_FIXED_FOR_CONDITION_ID = "UPDATE monitoring_schema.condition SET is_alert_already_sent = 0 WHERE id = ?";
   String SET_ALERT_SENT_FOR_CONDITION_ID = "UPDATE monitoring_schema.condition SET is_alert_already_sent = 1 WHERE id = ?";
+
 }

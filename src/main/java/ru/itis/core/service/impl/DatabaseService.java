@@ -70,6 +70,12 @@ public class DatabaseService implements IDatabaseService {
     }
 
     @Override
+    public void removeUser(long databaseId, long chatId) {
+        JdbcTemplate jdbcTemplate = configuredDatabasesService.getJdbcTemplateForDb(databaseId);
+        jdbcTemplate.update(CommonConstants.REMOVE_TELEGRAM_USER_QUERY, chatId);
+    }
+
+    @Override
     public boolean isUserAlreadyAdded(long databaseId, long chatId) {
         JdbcTemplate jdbcTemplate = configuredDatabasesService.getJdbcTemplateForDb(databaseId);
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.IS_TELEGRAM_USER_EXISTS_QUERY, chatId);
